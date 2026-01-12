@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     # local apps
     'blog',
     'shop',
-    'vercel',
 ]
 
 
