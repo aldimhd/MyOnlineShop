@@ -21,14 +21,14 @@ SECRET_KEY = os.getenv(
     "django-insecure-8@ol_mj9tg)oq8i*173_^h2dk_&-_h@fx&%626nit6=ut0a9yj"
 )
 
-DEBUG = os.getenv("DJANGO_DEBUG", "1") == "1"
+DEBUG = not os.getenv('VERCEL')
 
 # ALLOWED_HOSTS = os.getenv(
 #     "DJANGO_ALLOWED_HOSTS",
 #     "localhost,127.0.0.1"
 # ).split(",")
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost']
 
 
 # =========================
@@ -89,9 +89,13 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 
 # =========================
-# DATABASE (SQLite)
+# DATABASE (SQLite for Vercel - temporary)
 # =========================
-DB_PATH = Path(os.getenv("DJANGO_DB_PATH", BASE_DIR / "db.sqlite3"))
+import os
+if os.getenv('VERCEL'):
+    DB_PATH = '/tmp/db.sqlite3'
+else:
+    DB_PATH = BASE_DIR / "db.sqlite3"
 
 DATABASES = {
     'default': {
