@@ -6,13 +6,9 @@
     }],
     "routes": [
         {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
-        },
-        {
             "src": "/(.*)",
             "dest": "website/wsgi.py"
         }
-    ],
-    "buildCommand": "python manage.py collectstatic --noinput"
+    ]
+    
 }
